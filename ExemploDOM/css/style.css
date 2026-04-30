@@ -1,11 +1,11 @@
-/* Remove margens e espaçamentos padrões dos navegadores */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Estiliza o corpo da página */
+/* BODY */
 body {
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
@@ -15,7 +15,7 @@ body {
   color: #f8fafc;
 }
 
-/* Define largura máxima do conteúdo */
+/* CONTAINER */
 .container {
   width: 90%;
   max-width: 1100px;
@@ -23,13 +23,12 @@ body {
   padding: 60px 0;
 }
 
-/* Centraliza o cabeçalho */
+/* HERO */
 .hero {
   text-align: center;
   margin-bottom: 50px;
 }
 
-/* Estiliza a etiqueta superior */
 .tag {
   display: inline-block;
   padding: 8px 16px;
@@ -39,165 +38,120 @@ body {
   color: #93c5fd;
   font-size: 14px;
   font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
 }
 
-/* Estiliza o título principal */
 .hero h1 {
   font-size: 42px;
   margin-bottom: 16px;
 }
 
-/* Estiliza o parágrafo de descrição */
 .descricao {
   max-width: 650px;
   margin: 0 auto;
   color: #cbd5e1;
   font-size: 18px;
-  line-height: 1.6;
 }
 
-/* Divide a área do projeto em duas colunas */
-.area-projeto {
+/* CONTADOR */
+.contador-box {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* GRID */
+.grid-pecas {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
 }
 
-/* Estiliza o card de informações */
-.card-info {
-  background-color: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 24px;
-  padding: 32px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-}
-
-/* Estiliza o título do card */
-.card-info h2 {
-  font-size: 28px;
-  margin-bottom: 12px;
-}
-
-/* Estiliza o texto do card */
-.card-info p {
-  color: #cbd5e1;
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-/* Estiliza a caixa de status */
-.status-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(2, 6, 23, 0.7);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 24px;
-}
-
-/* Estiliza o texto "Status:" */
-.status-box span {
-  color: #94a3b8;
-}
-
-/* Estiliza o texto do status */
-.status-box strong {
-  color: #facc15;
-}
-
-/* Estiliza o botão principal */
-.btn-principal {
-  width: 100%;
-  padding: 15px 20px;
-  border: none;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
+/* PEÇA */
+.peca {
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
   cursor: pointer;
   transition: 0.3s;
+  background: #334155;
+  border: 2px solid transparent;
 }
 
-/* Efeito quando passa o mouse no botão */
-.btn-principal:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+/* HOVER */
+.peca:hover {
+  transform: scale(1.05);
 }
 
-/* Estiliza a peça do quebra-cabeça */
-.peca {
-  min-height: 340px;
-  border-radius: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.4s;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Cria um brilho visual na peça */
-.peca::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.15));
-}
-
-/* Organiza o conteúdo interno da peça */
-.peca-conteudo {
-  position: relative;
-  text-align: center;
-  padding: 30px;
-}
-
-/* Estiliza o ícone da peça */
-.icone {
-  display: block;
-  font-size: 70px;
-  margin-bottom: 20px;
-}
-
-/* Estiliza o título da peça */
-.peca h3 {
-  font-size: 30px;
-  margin-bottom: 12px;
-}
-
-/* Estiliza o texto da peça */
-.peca p {
-  color: #e2e8f0;
-  font-size: 18px;
-}
-
-/* Estado inicial da peça */
+/* BLOQUEADA */
 .bloqueada {
-  background: linear-gradient(135deg, #334155, #0f172a);
-  border: 2px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(135deg, #374151, #1f2937);
   filter: grayscale(40%);
 }
 
-/* Estado ativado da peça */
+/* ATIVA */
 .ativa {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-  border: 2px solid rgba(187, 247, 208, 0.6);
-  box-shadow: 0 25px 60px rgba(34, 197, 94, 0.35);
+  filter: none;
   transform: scale(1.03);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 
-/* Altera a cor do título quando a peça está ativa */
-.ativa h3 {
-  color: #ffffff;
+/* CORES BONITAS */
+.peca:nth-child(1).ativa {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
 }
 
-/* Adaptação para telas menores */
+.peca:nth-child(2).ativa {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.peca:nth-child(3).ativa {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.peca:nth-child(4).ativa {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* ÍCONE */
+.icone {
+  font-size: 50px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* TEXTO */
+.texto {
+  margin-bottom: 10px;
+  color: #e2e8f0;
+}
+
+/* BOTÃO */
+.btn-abrir {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  transition: 0.3s;
+}
+
+/* HOVER BOTÃO */
+.btn-abrir:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* MOSTRAR BOTÃO SÓ QUANDO ATIVA */
+.ativa .btn-abrir {
+  display: inline-block;
+}
+
+/* RESPONSIVO */
 @media (max-width: 800px) {
-  .area-projeto {
+  .grid-pecas {
     grid-template-columns: 1fr;
   }
 

@@ -1,49 +1,54 @@
-// Pega os elementos
-const botao = document.getElementById("btnAtivar");
-const statusTexto = document.getElementById("statusTexto");
-const peca = document.getElementById("peca");
-const icone = document.getElementById("iconePeca");
-const titulo = document.getElementById("tituloPeca");
-const texto = document.getElementById("textoPeca");
-const btnIrSite = document.getElementById("btnIrSite");
+const pecas = document.querySelectorAll(".peca");
+const contadorTexto = document.getElementById("contador");
+const mensagemFinal = document.getElementById("mensagemFinal");
 
-// Estado da peça
-let ativa = false;
+// guarda quais já foram desbloqueadas
+let desbloqueadas = [false, false, false, false];
 
-// Clique no botão
-botao.addEventListener("click", function () {
+pecas.forEach((peca, index) => {
 
-  ativa = !ativa;
+  peca.addEventListener("click", () => {
 
-  if (ativa) {
-    // ATIVAR
-    statusTexto.textContent = "Ativa";
-    botao.textContent = "Desativar Peça";
+    // remove todas (só uma ativa)
+    pecas.forEach(p => {
+      p.classList.remove("ativa");
+      p.classList.add("bloqueada");
 
-    peca.classList.remove("bloqueada");
+      p.querySelector(".icone").textContent = "🔒";
+      p.querySelector(".texto").textContent = "Clique para desbloquear";
+    });
+
+    // ativa a clicada
     peca.classList.add("ativa");
+    peca.classList.remove("bloqueada");
 
-    icone.textContent = "🔓";
-    titulo.textContent = "Peça Ativada";
-    texto.textContent = "Você desbloqueou a peça!";
+    const icone = peca.querySelector(".icone");
+    const texto = peca.querySelector(".texto");
 
-    // MOSTRA O BOTÃO
-    btnIrSite.querySelector("button").style.display = "block";
+    // emojis diferentes
+    const emojis = ["✨", "⚡", "🔥", "🚀"];
 
-  } else {
-    // DESATIVAR
-    statusTexto.textContent = "Bloqueada";
-    botao.textContent = "Ativar Peça";
+    icone.textContent = emojis[index];
+    texto.textContent = "Desbloqueado!";
 
-    peca.classList.remove("ativa");
-    peca.classList.add("bloqueada");
+    // marca como desbloqueada
+    desbloqueadas[index] = true;
 
-    icone.textContent = "🔒";
-    titulo.textContent = "Peça Bloqueada";
-    texto.textContent = "Aguardando interação...";
+    // 🔥 CONTADOR CORRETO (ACUMULADO)
+    const totalDesbloqueadas = desbloqueadas.filter(v => v).length;
+    contadorTexto.textContent = totalDesbloqueadas;
 
-    // ESCONDE O BOTÃO
-    btnIrSite.querySelector("button").style.display = "none";
-  }
+    // 🔥 VERIFICA SE COMPLETOU
+    if (desbloqueadas.every(v => v)) {
+      mensagemFinal.textContent = "🎉 Parabéns, você completou a fase 1!";
+    }
+
+  });
+
+  // evita bug do botão
+  const botao = peca.querySelector(".btn-abrir");
+  botao.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
 
 });

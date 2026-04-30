@@ -14,47 +14,59 @@
       <p class="tag">Programação Website I</p>
       <h1>Quebra-Cabeça Interativo</h1>
       <p class="descricao">
-        Nesta aula vamos criar a primeira peça interativa usando HTML, CSS e JavaScript.
+        Desbloqueie as páginas para acessar 🚀
       </p>
     </section>
 
     <section class="area-projeto">
 
-      <div class="card-info">
-        <h2>Peça 01</h2>
+      <div class="contador-box">
+        <h2>Peças ativadas: <span id="contador">0</span>/4</h2>
 
-        <p>
-          Clique no botão para ativar a primeira peça do projeto.
-        </p>
-
-        <div class="status-box">
-          <span>Status:</span>
-          <strong id="statusTexto">Bloqueada</strong>
-        </div>
-
-        <button id="btnAtivar" class="btn-principal">
-          Ativar Peça
-        </button>
+        <!-- MENSAGEM FINAL -->
+        <p id="mensagemFinal" style="text-align:center; margin-top:20px; font-weight:bold;"></p>
       </div>
 
-      <div id="peca" class="peca bloqueada">
-        <div class="peca-conteudo">
-          <span id="iconePeca" class="icone">🔒</span>
-          <h3 id="tituloPeca">Peça Bloqueada</h3>
-          <p id="textoPeca">Aguardando interação...</p>
+      <div class="grid-pecas">
 
-          <!-- BOTÃO NOVO -->
-          <a id="btnIrSite"
-             href="aula.html"
-             target="_blank">
+        <!-- PEÇA 1 -->
+        <div class="peca bloqueada">
+          <span class="icone">🔒</span>
+          <h3>Página 1</h3>
+          <p class="texto">Clique para desbloquear</p>
 
-            <button class="btn-principal" style="margin-top: 20px; display: none;">
-              Ir para a Aula
-            </button>
-
+          <a href="aula.html" target="_blank">
+            <button class="btn-abrir">Ir para página</button>
           </a>
-
         </div>
+
+        <!-- PEÇA 2 -->
+        <div class="peca bloqueada">
+          <span class="icone">🔒</span>
+          <h3>Página 2</h3>
+          <p class="texto">Clique para desbloquear</p>
+
+          <a href="aula2.html" target="_blank">
+            <button class="btn-abrir">Ir para página</button>
+          </a>
+        </div>
+
+        <!-- PEÇA 3 -->
+        <div class="peca bloqueada">
+          <span class="icone">🔒</span>
+          <h3>Página 3</h3>
+          <p class="texto">Clique para desbloquear</p>
+          <button class="btn-abrir">Ir para página</button>
+        </div>
+
+        <!-- PEÇA 4 -->
+        <div class="peca bloqueada">
+          <span class="icone">🔒</span>
+          <h3>Página 4</h3>
+          <p class="texto">Clique para desbloquear</p>
+          <button class="btn-abrir">Ir para página</button>
+        </div>
+
       </div>
 
     </section>
