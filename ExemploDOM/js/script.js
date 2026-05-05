@@ -1,54 +1,98 @@
 const pecas = document.querySelectorAll(".peca");
 const contadorTexto = document.getElementById("contador");
 const mensagemFinal = document.getElementById("mensagemFinal");
+const botaoReset = document.getElementById("reset");
 
-// guarda quais já foram desbloqueadas
+// 👉 ALTERA AQUI O LIMITE (2 ou 3)
+const LIMITE = 3;
+
+// controle de estado
 let desbloqueadas = [false, false, false, false];
 
 pecas.forEach((peca, index) => {
 
   peca.addEventListener("click", () => {
 
-    // remove todas (só uma ativa)
-    pecas.forEach(p => {
-      p.classList.remove("ativa");
-      p.classList.add("bloqueada");
+    const ativasAgora = desbloqueadas.filter(v => v).length;
 
-      p.querySelector(".icone").textContent = "🔒";
-      p.querySelector(".texto").textContent = "Clique para desbloquear";
-    });
-
-    // ativa a clicada
-    peca.classList.add("ativa");
-    peca.classList.remove("bloqueada");
+    // 🚫 BLOQUEIO TOTAL
+    if (!desbloqueadas[index] && ativasAgora >= LIMITE) {
+      mensagemFinal.textContent = "⚠️ Limite atingido!";
+      alert("Você já atingiu o limite!");
+      return;
+    }
 
     const icone = peca.querySelector(".icone");
     const texto = peca.querySelector(".texto");
 
-    // emojis diferentes
     const emojis = ["✨", "⚡", "🔥", "🚀"];
 
-    icone.textContent = emojis[index];
-    texto.textContent = "Desbloqueado!";
+    // 🔁 TOGGLE (ativa/desativa)
+    if (desbloqueadas[index]) {
 
-    // marca como desbloqueada
-    desbloqueadas[index] = true;
+      // desativa
+      peca.classList.remove("ativa");
+      peca.classList.add("bloqueada");
 
-    // 🔥 CONTADOR CORRETO (ACUMULADO)
-    const totalDesbloqueadas = desbloqueadas.filter(v => v).length;
-    contadorTexto.textContent = totalDesbloqueadas;
+      icone.textContent = "🔒";
+      texto.textContent = "Clique para desbloquear";
 
-    // 🔥 VERIFICA SE COMPLETOU
+      desbloqueadas[index] = false;
+
+    } else {
+
+      // ativa
+      peca.classList.add("ativa");
+      peca.classList.remove("bloqueada");
+
+      icone.textContent = emojis[index];
+      texto.textContent = "Desbloqueado!";
+
+      desbloqueadas[index] = true;
+    }
+
+    // 📊 CONTADOR
+    const total = desbloqueadas.filter(v => v).length;
+    contadorTexto.textContent = total;
+
+    // 🏆 VITÓRIA
     if (desbloqueadas.every(v => v)) {
-      mensagemFinal.textContent = "🎉 Parabéns, você completou a fase 1!";
+      mensagemFinal.textContent = "🎉 Você venceu!";
+    } else if (total >= LIMITE) {
+      mensagemFinal.textContent = "⚠️ Limite atingido!";
+    } else {
+      mensagemFinal.textContent = "";
     }
 
   });
 
-  // evita bug do botão
+  // evita bug no botão interno
   const botao = peca.querySelector(".btn-abrir");
-  botao.addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
+  if (botao) {
+    botao.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  }
 
 });
+
+
+// 🔄 BOTÃO RESET
+if (botaoReset) {
+  botaoReset.addEventListener("click", () => {
+
+    desbloqueadas = [false, false, false, false];
+
+    pecas.forEach((peca) => {
+      peca.classList.remove("ativa");
+      peca.classList.add("bloqueada");
+
+      peca.querySelector(".icone").textContent = "🔒";
+      peca.querySelector(".texto").textContent = "Clique para desbloquear";
+    });
+
+    contadorTexto.textContent = 0;
+    mensagemFinal.textContent = "";
+
+  });
+}
